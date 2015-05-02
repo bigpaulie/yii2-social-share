@@ -1,0 +1,23 @@
+{
+    "name": "bigpaulie/yii2-social-share",
+    "description": "Yii2 Social Link Sharer Extension",
+    "keywords": ["social","share","widget","yii2"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paul P",
+            "email": "bigpaulie25ro@yahoo.com",
+            "homepage": "http://www.paul-resume.com"
+        }
+    ],
+    "require": {
+        "php": ">= 5.4",
+        "yiisoft/yii2": "2.*",
+        "bower-asset/bootstrap-social": "~4.0"
+    },
+    "autoload": {
+        "psr-4":{
+            "bigpaulie\\social\\share\\": "src/"
+        }
+    }
+}
