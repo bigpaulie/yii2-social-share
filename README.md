@@ -51,6 +51,29 @@ The output of this will be something similar to :
     </div>
 ```
 
+#### The shared URL
+By default the widget set's the URL to the current route, you can change that as needed by 
+using the "url" property.
+
+```php
+    echo Share::widget([
+        'url' => 'http://www.domain.com',
+    ]);
+```
+
+Or
+
+```php
+    echo Share::widget([
+        'url' => Url::to(['site/index'] , TRUE),
+    ]);
+```
+Don't forget to require the helper library Url and to use the second parameter of the method
+for the full URL to the page.
+```php
+    use yii\helpers\Url;
+```
+
 #### Attributes of main container
 You can add or change attributes of the main container using the htmlOptions property.
 By default the main container has an id attribute similar to #w0, you can change that if you want.
