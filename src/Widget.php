@@ -19,7 +19,10 @@ class Widget extends \yii\base\Widget {
         'google-plus' => 'https://plus.google.com/share?url={url}',
         'twitter' => 'https://twitter.com/home?status={url}',
         'linkedin' => 'https://www.linkedin.com/shareArticle?mini=true&url={url}',
+        'vk' =>  'http://vkontakte.ru/share.php?url={url}',
+        'odnoklassniki' => 'http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1&st._surl={url}',
     ];
+    public $missButton = array();
 
     public function init() {
 
@@ -41,6 +44,9 @@ class Widget extends \yii\base\Widget {
     }
 
     protected function parseTemplate($network) {
+        if (in_array($network,$this->missButton)) {
+            return false;
+        }
         if ($this->type == 'small') {
             $url = $this->networks[$network];
             $button = str_replace('{button}', '<a href="#" class="btn btn-social-icon btn-{network}" onClick="sharePopup(\'' . $url . '\');">'
