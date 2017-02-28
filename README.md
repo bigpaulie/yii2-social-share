@@ -1,4 +1,6 @@
 # yii2-social-share
+[![Latest Stable Version](https://poser.pugx.org/bigpaulie/yii2-social-share/v/stable)](https://packagist.org/packages/bigpaulie/yii2-social-share) [![Total Downloads](https://poser.pugx.org/bigpaulie/yii2-social-share/downloads)](https://packagist.org/packages/bigpaulie/yii2-social-share) [![Latest Unstable Version](https://poser.pugx.org/bigpaulie/yii2-social-share/v/unstable)](https://packagist.org/packages/bigpaulie/yii2-social-share) [![License](https://poser.pugx.org/bigpaulie/yii2-social-share/license)](https://packagist.org/packages/bigpaulie/yii2-social-share)
+
 Yii2 Social Link Sharer 
 
 Built using <a href="http://lipis.github.io/bootstrap-social/" target="_blank">Bootstrap Social</a> and <a href="http://fontawesome.io/" target="_blank">Font Awesome</a> , two very cool projects !
@@ -90,6 +92,18 @@ By default the main container has an id attribute similar to #w0, you can change
 The widget provides to types of buttons
     small (icon only)
     large (icon + text)
+    
+```php 
+    echo Share::widget([
+        'type' => Share::TYPE_SMALL
+    ]);
+```
+
+```php 
+    echo Share::widget([
+        'type' => Share::TYPE_LARGE
+    ]);
+```
 The default text for the large buttons is "Share on NETWORK", where NETWORK is the name of the 
 social network ex : Facebook.
 You can change the default text by using the "text" property of the widget.
@@ -100,8 +114,22 @@ You can change the default text by using the "text" property of the widget.
 ```
 
 #### Networks
-Currently the widget provides 4 buttons
+Currently the widget provides 6 buttons
     Facebook
     Google Plus
     Twitter
     Linkedin
+    Vk
+    odnoklassniki
+    
+#### Excluding networks
+For some reason you may need to exclude one or more networks.
+In order to do that you can use the "exclude" property of the widget
+```php
+    echo Share::widget([
+        'exclude' => ['network1', 'network2']
+    ]);
+```
+
+### Contributions
+Contributions are most welcomed, just fork modify and submit a pull request.
