@@ -31,6 +31,24 @@ class Widget extends \yii\base\Widget {
     public $url;
 
     /**
+     * Title to be shared
+     * @var string
+     */
+    public $title;
+
+    /**
+     * Description to be shared
+     * @var string
+     */
+    public $description;
+
+    /**
+     * Image to be shared
+     * @var string
+     */
+    public $image;
+
+    /**
      * Enclosing HTML tag
      * @var string
      */
@@ -68,14 +86,26 @@ class Widget extends \yii\base\Widget {
         'facebook' => 'https://www.facebook.com/sharer/sharer.php?u={url}',
         'google-plus' => 'https://plus.google.com/share?url={url}',
         'twitter' => 'https://twitter.com/home?status={url}',
+        'pinterest' => 'http://pinterest.com/pin/create/button/?url={url}' .
+            '&media={image}' .
+            '&description={description}',
         'linkedin' => 'https://www.linkedin.com/shareArticle?mini=true&url={url}',
         'vk' =>  'http://vkontakte.ru/share.php?url={url}',
         'odnoklassniki' => 'http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1&st._surl={url}',
     ];
 
     /**
+     * Include network form widget
+     * If not empty - only keys presented in this array will be included to
+     * the widget.
+     *
+     * @var array
+     */
+    public $include = [];
+
+    /**
      * Exclude network form widget
-     * any key present in this array will be excluded form
+     * any key present in this array will be excluded from
      * the widget.
      *
      * @var array
@@ -116,31 +146,50 @@ class Widget extends \yii\base\Widget {
      * @param string $network
      * @return mixed
      */
-    protected function parseTemplate($network) {
+    protected function parseTemplate($network)
+    {
+        $button = '';
 
-        if ( !in_array($network, $this->exclude) ) {
+        if (!in_array($network, $this->exclude)) {
+            $url = $this->networks[$network];
+
             switch ($this->type) {
                 case self::TYPE_SMALL:
-                    $url = $this->networks[$network];
-                    $button = str_replace('{button}',
+                    $button = str_replace(
+                        '{button}',
                         '<a href="#" class="btn btn-social-icon btn-{network}" onClick="sharePopup(\'' . $url . '\');">'
-                        . '<i class="fa fa-{network}"></i></a>', $this->template);
-                    $button = str_replace('{network}', $network, $button);
-                    $button = str_replace('{url}', $this->url, $button);
-                    return $button;
+                        . '<i class="fa fa-{network}"></i></a>',
+                        $this->template
+                    );
+                    break;
                 case self::TYPE_LARGE:
-                    $url = $this->networks[$network];
-                    $button = str_replace('{button}',
+                    $button = str_replace(
+                        '{button}',
                         '<a href="#" class="btn btn-block btn-social btn-{network}" onClick="sharePopup(\'' . $url . '\');">'
-                        . '<i class="fa fa-{network}"></i> {text}</a>', $this->template);
-                    $button = str_replace('{text}', $this->text, $button);
-                    $button = str_replace('{network}', $network, $button);
-                    $button = str_replace('{url}', $this->url, $button);
-                    return $button;
+                        . '<i class="fa fa-{network}"></i> {text}</a>',
+                        $this->template
+                    );
+                    break;
                 default:
                     break;
             }
         }
+
+        if ($button) {
+            $button = str_replace(
+                [
+                    '{text}', '{network}', '{url}',
+                    '{title}', '{description}', '{image}'
+                ],
+                [
+                    $this->text, $network, urlencode($this->url),
+                    urlencode($this->title), urlencode($this->description), urlencode($this->image)
+                ],
+                $button
+            );
+        }
+
+        return $button;
     }
 
     /**

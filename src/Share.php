@@ -15,9 +15,13 @@ class Share extends Widget {
      * Build the HTML
      */
     public function run() {
-        echo Html::beginTag($this->tag , $this->htmlOptions);
-        foreach ($this->getNetworks() as $key => $val) {
-            echo $this->parseTemplate($key);
+        echo Html::beginTag($this->tag, $this->htmlOptions);
+
+        $networks = $this->getNetworks();
+        $networks_available = $this->include ?: array_keys($networks);
+
+        foreach ($networks_available as $network) {
+            echo $this->parseTemplate($network);
         }
         echo Html::endTag($this->tag);
     }

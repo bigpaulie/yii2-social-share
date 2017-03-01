@@ -76,6 +76,20 @@ for the full URL to the page.
     use yii\helpers\Url;
 ```
 
+#### The shared data
+By default the widget pass to social network only URL.
+Some networks, for example Pinterest, allow pass title, description and image.
+You can change that as needed by 
+using the "title", "description" or "image" properties.
+
+```php
+    echo Share::widget([
+        'title' => 'Some title',
+        'description' => 'Some description',
+        'image' => '/path-to-some-image.jpg',
+    ]);
+```
+
 #### Attributes of main container
 You can add or change attributes of the main container using the htmlOptions property.
 By default the main container has an id attribute similar to #w0, you can change that if you want.
@@ -118,11 +132,24 @@ Currently the widget provides 6 buttons
     Facebook
     Google Plus
     Twitter
+    Pinterest
     Linkedin
     Vk
     odnoklassniki
     
-#### Excluding networks
+    
+#### Including only some networks
+For some reason you may need to include only some networks.
+In order to do that you can use the "include" property of the widget
+```php
+    echo Share::widget([
+        'include' => ['network1', 'network2']
+    ]);
+```
+
+Presented social networks will be shown in that order in which you put them.
+
+#### Excluding some networks
 For some reason you may need to exclude one or more networks.
 In order to do that you can use the "exclude" property of the widget
 ```php
