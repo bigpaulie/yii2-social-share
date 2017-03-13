@@ -86,9 +86,7 @@ class Widget extends \yii\base\Widget {
         'facebook' => 'https://www.facebook.com/sharer/sharer.php?u={url}',
         'google-plus' => 'https://plus.google.com/share?url={url}',
         'twitter' => 'https://twitter.com/home?status={url}',
-        'pinterest' => 'http://pinterest.com/pin/create/button/?url={url}' .
-            '&media={image}' .
-            '&description={description}',
+        'pinterest' => 'http://pinterest.com/pin/create/button/?url={url}&media={image}&description={description}',
         'linkedin' => 'https://www.linkedin.com/shareArticle?mini=true&url={url}',
         'vk' =>  'http://vkontakte.ru/share.php?url={url}',
         'odnoklassniki' => 'http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1&st._surl={url}',
