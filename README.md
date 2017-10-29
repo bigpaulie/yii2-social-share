@@ -158,7 +158,7 @@ In order to do that you can use the "exclude" property of the widget
     ]);
 ```
 
-#### Add utm ,arks
+#### Add utm marks
 For enterprise apps you mostly need to add UTM mark for analytics.
 ```php
     // add by default
