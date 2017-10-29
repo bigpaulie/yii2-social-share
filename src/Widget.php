@@ -94,7 +94,7 @@ class Widget extends \yii\base\Widget {
      * The 'utm_campaign' mark. It works when $addUtm == TRUE
      * @var string
      */
-    public $utmCampaign= 'viral_retention';
+    public $utmCampaign= 'retention';
 
 
     /**
