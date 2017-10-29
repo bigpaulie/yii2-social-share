@@ -158,5 +158,22 @@ In order to do that you can use the "exclude" property of the widget
     ]);
 ```
 
+#### Add utm ,arks
+For enterprise apps you mostly need to add UTM mark for analytics.
+```php
+    // add by default
+    echo Share::widget([
+        'addUtm' => true,
+    ]);
+    
+    // little customization
+    echo Share::widget([
+        'addUtm' => true, // necessary flag
+        'utmMedium' => 'social_share',
+        'utmCampaign' => 'viral_retention',
+     ]);
+        
+```
+
 ### Contributions
 Contributions are most welcomed, just fork modify and submit a pull request.

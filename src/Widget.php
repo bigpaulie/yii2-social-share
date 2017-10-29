@@ -79,6 +79,25 @@ class Widget extends \yii\base\Widget {
     public $htmlOptions = [];
 
     /**
+     * Flag to add utm marks into the target URL
+     * @var boolean
+     */
+    public $addUtm = false;
+
+    /**
+     * The 'utm_medium' mark. It works when $addUtm == TRUE
+     * @var string
+     */
+    public $utmMedium = 'social_share';
+
+    /**
+     * The 'utm_campaign' mark. It works when $addUtm == TRUE
+     * @var string
+     */
+    public $utmCampaign= 'viral_retention';
+
+
+    /**
      * Supported social networks
      * @var array
      */
@@ -137,6 +156,15 @@ class Widget extends \yii\base\Widget {
         ShareAsset::register($this->getView());
     }
 
+    protected function buildUtm($network) {
+        return sprintf(
+            'utm_source=%s&utm_medium=%s&utm_campaign=%s',
+            $network,
+            $this->utmMedium,
+            $this->utmCampaign
+        );
+    }
+
     /**
      * Parse the template and create the
      * specific button for the selected network
@@ -174,13 +202,22 @@ class Widget extends \yii\base\Widget {
         }
 
         if ($button) {
+            $url = $this->url;
+            if ($this->addUtm) {
+                $delimitBy = '?';
+                if (strpos($this->url, '?')) {
+                    $delimitBy = '&';
+                }
+                $url .= ($delimitBy . $this->buildUtm($network));
+            }
+
             $button = str_replace(
                 [
                     '{text}', '{network}', '{url}',
                     '{title}', '{description}', '{image}'
                 ],
                 [
-                    $this->text, $network, urlencode($this->url),
+                    $this->text, $network, urlencode($url),
                     urlencode($this->title), urlencode($this->description), urlencode($this->image)
                 ],
                 $button
