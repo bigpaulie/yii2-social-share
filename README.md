@@ -111,7 +111,8 @@ The widget provides three types of buttons
 ```php 
     echo Share::widget([
         'type' => Share::TYPE_EXTRA_SMALL
-       
+```
+
 ```php 
     echo Share::widget([
         'type' => Share::TYPE_SMALL
