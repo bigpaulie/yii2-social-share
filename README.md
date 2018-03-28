@@ -103,10 +103,15 @@ By default the main container has an id attribute similar to #w0, you can change
 ```
 
 #### Widget button types 
-The widget provides to types of buttons
+The widget provides three types of buttons
+    extra-small (small icons only)
     small (icon only)
     large (icon + text)
-    
+ 
+```php 
+    echo Share::widget([
+        'type' => Share::TYPE_EXTRA_SMALL
+       
 ```php 
     echo Share::widget([
         'type' => Share::TYPE_SMALL
