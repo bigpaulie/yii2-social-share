@@ -11,6 +11,11 @@ use bigpaulie\social\share\ShareAsset;
  * @package bigpaulie\social\share
  */
 class Widget extends \yii\base\Widget {
+    /**
+     * Widget type with extra small buttons
+     * @var string
+     */
+    const TYPE_EXTRA_SMALL = 'extra-small';
 
     /**
      * Widget type with small buttons
@@ -180,6 +185,14 @@ class Widget extends \yii\base\Widget {
             $url = $this->networks[$network];
 
             switch ($this->type) {
+                case self::TYPE_EXTRA_SMALL:
+                    $button = str_replace(
+                        '{button}',
+                        '<a href="#" class="btn btn-sm btn-social-icon btn-{network}" onClick="sharePopup(\'' . $url . '\');">'
+                        . '<i class="fa fa-{network}"></i></a>',
+                        $this->template
+                    );
+                    break;
                 case self::TYPE_SMALL:
                     $button = str_replace(
                         '{button}',
